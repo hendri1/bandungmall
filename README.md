@@ -16,5 +16,8 @@ Jadi nanti coding di development aja.
 
 tutorial git bisa disini : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
 
-clone_projek : git clone https://github.com/hendri1/bandungmall_projek (disini masih master)
-pindah_branch : git checkout development (coding harus disini jangan di staging & master)
+note: **
+clone projek : git clone https://github.com/hendri1/bandungmall_projek (disini masih master)
+pindah branch : git checkout development (coding harus disini jangan di staging & master)
+commit : git commit -m "pesannya" (harus kasih keterangan biar gampang nantinya)
+push : git push origin development (push juga harus disini jangan di staging & master)
