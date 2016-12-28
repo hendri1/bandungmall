@@ -52,15 +52,10 @@
 @include('user.templates.header')
 
 @yield('content')
-</div> 
-
-{{-- 
-
-<div class="white-bg gap"></div>
-@include('user.templates.footer')
 </div>
 
---}}
+@include('user.templates.footer')
+
 
 <!-- Le javascript
 ================================================== -->
@@ -79,5 +74,19 @@
 <script type="text/javascript" src="{{ asset('public/assets/user/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script> 
 <script type="text/javascript" src="{{ asset('public/assets/user/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script> 
 <script src="{{ asset('public/assets/user/js/main.js') }}"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/5860a397ddb8373fd2b37fbc/default';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+</script>
+
 </body>
 </html>

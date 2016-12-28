@@ -88,7 +88,7 @@
                 @if(Session::has('cartQty'))
                     Terdapat {{Session::get('cartQty')}} barang dalam Cart<br>
                 @else
-                    Cart masih kosong
+                    <span style="color:#fff">Cart masih kosong</span>
                 @endif
               </li>
             </ul>
