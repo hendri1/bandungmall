@@ -51,7 +51,10 @@
 <div id="wrap"> 
 @include('user.templates.header')
 
-{{-- @yield('content') 
+@yield('content')
+</div> 
+
+{{-- 
 
 <div class="white-bg gap"></div>
 @include('user.templates.footer')
@@ -62,9 +65,6 @@
 <!-- Le javascript
 ================================================== -->
 
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="{{ asset('public/assets/user/js/bootstrap.min.js') }}"></script>
 <!-- Wrap End --> 
 <script src="{{ asset('public/assets/user/js/jquery-1.11.3.js') }}"></script> 
 <script src="{{ asset('public/assets/user/js/wow.min.js') }}"></script> 
