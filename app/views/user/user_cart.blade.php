@@ -196,7 +196,7 @@
                     <a class="btn" title="checkout" href="{{URL::to('/user/address')}}"> Masukkan alamat / pilih barang terlebih dahulu <i class="fa fa-arrow-right"></i> </a>
                     @endif
                   @endif
-                  <p>Checkout with Current Address</p>
+                  <p>Address information will be on the next page</p>
                 </div>
               </div>
             </div>

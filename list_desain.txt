@@ -1,7 +1,7 @@
 * home
 * category
-product detail
-cart
+* product detail
+* cart
 checkout
 profile
 final order

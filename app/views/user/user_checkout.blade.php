@@ -1,360 +1,233 @@
 @extends('user.templates.layout')
 
 @section('content')
-<div class="container main-container headerOffset">
-    <div class="row">
-        <div class="breadcrumbDiv col-lg-12">
-            <ul class="breadcrumb">
-                <li><a href="{{URL::to('/')}}">Home</a></li>
-                <li><a href="{{URL::to('/cart')}}">Cart</a></li>
-                <li class="active"> Checkout</li>
-            </ul>
+  <!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= SUB BANNER =========-->
+    <section class="sub-banner">
+      <div class="container">
+        <h4>SHOPPING CART</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">SHOPPING CART</li>
+        </ol>
+      </div>
+    </section>
+    
+    <!--======= PAGES INNER =========-->
+    <section class="section-p-30px pages-in chart-page">
+      <div class="container"> 
+        
+        <!-- Payments Steps -->
+        <div class="payment_steps">
+          <ul class="row">
+            <!-- SHOPPING CART -->
+            <li class="col-sm-4"> <i class="fa fa-shopping-cart"></i>
+              <h6>SHOPPING CART</h6>
+            </li>
+            
+            <!-- CHECK OUT DETAIL -->
+            <li class="col-sm-4 current"> <i class="fa fa-align-left"></i>
+              <h6>CHECK OUT DETAIL</h6>
+            </li>
+            
+            <!-- ORDER COMPLETE -->
+            <li class="col-sm-4"> <i class="fa fa-check"></i>
+              <h6>ORDER COMPLETE</h6>
+            </li>
+          </ul>
         </div>
-    </div>
-    <!--/.row-->
 
-    <div class="row">
-        <div class="col-lg-9 col-md-9 col-sm-7">
-            <h1 class="section-title-inner"><span><i
-                        class="glyphicon glyphicon-shopping-cart"></i>CHECKOUT</span></h1>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
-            <h4 class="caps"><a href="{{URL::to('/')}}"><i class="fa fa-chevron-left"></i> Back to shopping </a></h4>
-        </div>
-    </div>
-    <!--/.row-->
+        <!-- Payments Steps -->
+        <div class="shopping-cart">
 
-    <div class="row">
-        <div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="row userInfo">
-                <div class="col-xs-12 col-sm-12">
+          <!-- SHOPPING INFORMATION -->
+          <div class="cart-ship-info">
+            <div class="row">
 
+              <div class="col-sm-7">
+                <h6>BILLING INFORMATION</h6>
+                <ul class="row">
 
-                    <div class="w100 clearfix">
-                        <div class="row userInfo">
+                  <!-- ERROR ALAMAT -->
+                  @if(!empty($error_alamat))
+                    <li class="col-md-12 text-danger">* {{$error_alamat}}</li>
+                  @endif
 
-                            <div style="clear: both"></div>
+                  <li class="col-md-12">
+                    @if (count($user_address) != 0)
+                    <label> PILIH ALAMAT
+                      <select class="selectpicker" required aria-required="true" onchange="runAddressId()" id="SelectAddress" name="SelectAddress">
+                        <option value="0">Pilih Alamat Pengiriman</option>
+                        @foreach($user_address as $address)    
+                        <option value="{{$address->id}}">{{$address->name}}</option>
+                        @endforeach
+                      </select>
+                    </label>
+                    @else
+                    <p class="lead">Silahkan masukkan alamat anda terlebih dahulu</p>
+                    @endif
+                  </li>
 
-                            <div class="onepage-checkout col-lg-12">
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingOne">
-                                            <h4 class="panel-title">
-                                                <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                                   href="#BillingInformation" aria-expanded="true"
-                                                   aria-controls="BillingInformation">
-                                                    Billing information
-                                                    @if(!empty($error_alamat))
-                                                        <span style="margin-left:10px; color:red">* {{$error_alamat}}</span>
-                                                    @endif
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="BillingInformation" class="panel-collapse collapse in" role="tabpanel"
-                                             aria-labelledby="BillingInformation">
-                                            <div class="panel-body">
-                                                <div style="clear: both"></div>
+                  <!-- *BILLING ADDRESS -->
+                  <li class="col-md-12">
+                    <label> BILLING ADDRESS
+                      <span id="billingAddress" style="color:red">* Alamat belum dipilih</span>
+                    </label>
+                  </li>
 
-                                                <div id="exisitingAddressBox" class="collapse in">
-                                                    <div class="form-group uppercase">
-                                                        <strong>Pilih Billing address</strong>
-                                                    </div>
-                                                    <form>
-                                                        <div class="form-group required maxwidth300">
-                                                            <label for="InputCountry">
-                                                                Pilih Alamat <sup>*</sup>
-                                                            </label>
-                                                            @if (count($user_address) != 0)
-                                                            <select class="form-control" required aria-required="true" onchange="runAddressId()"
-                                                                    id="SelectAddress" name="SelectAddress">
-                                                                <option value="0">Pilih Alamat Pengiriman</option>
-                                                                @foreach($user_address as $address)    
-                                                                <option value="{{$address->id}}">{{$address->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @else
-                                                            Silahkan masukkan alamat anda terlebih dahulu
-                                                            @endif
-                                                        </div>
-                                                    </form>
-                                                    <div class="form-group">
-                                                        <strong class="uppercase">Billing address</strong><br>
-                                                        <span id="billingAddress" style="color:red">* Alamat belum dipilih</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingTwo">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse"
-                                                   data-parent="#accordion" href="#Couponinformation"
-                                                   aria-expanded="false" aria-controls="collapseTwo">
-                                                    Coupon information
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="Couponinformation" class="panel-collapse collapse in" role="tabpanel"
-                                             aria-labelledby="Couponinformation">
-                                            <div class="panel-body">
-                                                <div id="kurir"
-                                                         class="form-group  col-lg-4 col-sm-4 col-md-4 -col-xs-12">
-                                                        <label for="id-state">Kode Kupon</label>&nbsp;&nbsp;&nbsp;
-                                                        <label style="color:red" class="checkKupon"></label>
-                                                        <input class="form-control" size="10" id="couponCode" type="text"
-                                                              placeholder="Masukkan Kode Kupon" name="code"> 
-                                                        <input class="btn  btn-lg btn-primary" id="checkCoupon" type="submit"
-                                                              value="Cek Kode">
-                                                        <input class="btn  btn-lg btn-info" id="submitCoupon" type="submit"
-                                                              value="Pakai Kupon" disabled> 
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingTwo">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse"
-                                                   data-parent="#accordion" href="#Shippinginformation"
-                                                   aria-expanded="false" aria-controls="collapseTwo">
-                                                    Shipping information
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="Shippinginformation" class="panel-collapse collapse in" role="tabpanel"
-                                             aria-labelledby="Shippinginformation">
-                                            <div class="panel-body">
+                </ul>
 
-                                                <form class="form-inline" action="page" method="post">
-                                                    <label class="radio inline">
-                                                        <input id="existingShippingAddress" type="radio"
-                                                               value="option-b1" name="add" checked="checked"> Same as
-                                                        Billing address
-                                                    </label>&nbsp;&nbsp;
-                                                    <label class="radio inline">
-                                                        <input id="newShippingAddress" type="radio" value="option-b2"
-                                                               name="add"> New Shipping
-                                                        address
-                                                    </label>
-                                                </form>
-                                                <hr>
-                                                <div style="clear: both"></div>
+                <hr>
+                <h6>COUPON INFORMATION</h6>
+                <ul class="row">
 
-                                                <div class="expandBox collapse" id="newShippingAddressBox">
-                                                    <div class="form-group uppercase">
-                                                        <a href="{{URL::to('user/address')}}"><strong>new shipping address</strong></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                  <li class="col-md-12">
+                    <label> KODE KUPON
+                      <input type="text" name="code" size="10" placeholder="">
+                    </label>
+                  </li>
 
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse"
-                                                   data-parent="#accordion" href="#Deliverymethod" aria-expanded="false"
-                                                   aria-controls="Deliverymethod">
-                                                    Delivery method
-                                                    @if(!empty($error_kurir))
-                                                        <span style="margin-left:10px; color:red">* {{$error_kurir}}</span>
-                                                    @endif
-                                                    @if(!empty($error_paket))
-                                                        <span style="margin-left:10px; color:red">* {{$error_paket}}</span>
-                                                    @endif
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="Deliverymethod" class="panel-collapse collapse in" role="tabpanel"
-                                             aria-labelledby="Deliverymethod">
-                                            <div class="panel-body">
-                                                <div class="w100 row">
-                                                    <div id="kurir"
-                                                         class="form-group  col-lg-4 col-sm-4 col-md-4 -col-xs-12">
-                                                        <label for="id-state">Kurir yang diinginkan</label>
-                                                        <select class="form-control" required aria-required="true"
-                                                                id="SelectKurir" name="SelectKurir" onchange="changeKurir()">
-                                                            <option value="0">Pilih Kurir</option>
-                                                            <option value="jne">JNE</option>
-                                                            <option value="tiki">TIKI</option>
-                                                        </select>
-                                                        <label for="id-state">Paket:</label>
-                                                        <select class="form-control" required aria-required="true"
-                                                                id="SelectPacket" name="SelectPacket" onchange="changePaket()">
-                                                            <option value="0">Pilih Jenis Pengiriman</option>
-                                                            <!-- <option value="biasa">Biasa</option>
-                                                            <option value="kilat">Kilat</option> -->
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                  <li class="col-md-12">
+                    <button class="btn btn-dark" id="checkCoupon" type="submit">Cek Kode</button>
+                    <button class="btn btn-info" id="submitCoupon" type="submit" disabled> Pakai Kupon</button>
+                  </li>
 
+                </ul>
 
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse"
-                                                   data-parent="#accordion" href="#Paymentmethod" aria-expanded="false"
-                                                   aria-controls="Paymentmethod">
-                                                    Payment method
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="Paymentmethod" class="panel-collapse collapse in" role="tabpanel"
-                                             aria-labelledby="Paymentmethod">
-                                            <div class="panel-body">
+                <hr>
+                <h6>SHIPPING INFORMATION</h6>
+                <ul class="row">
+                  <form class="form-inline" action="page" method="post">
+                    <li>
+                      <div class="checkbox" style="padding-left:10px">
+                        <input id="checkbox3-1" class="styled" type="radio" value="option-b1" name="add" checked>
+                        <label for="checkbox3-1" style="padding-left:30px"> SAME AS BILLING ADDRESS </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="checkbox" style="padding-left:10px">
+                        <input id="checkbox3-2" class="styled" type="radio" value="option-b2" name="add" data-toggle="collapse" data-target="newShippingAddressBox">
+                        <label for="checkbox3-2" style="padding-left:30px"> NEW SHIPPING ADDRESS </label>
+                      </div>
+                    </li>
+                    <li class="expandBox collapse" id="newShippingAddressBox">
+                      <div class="form-group uppercase">
+                        <a class="btn btn-dark" href="{{URL::to('user/address')}}">New shipping address</a>
+                      </div>
+                    </li>
+                  </form>
+                </ul>
 
+                <hr>
+                <h6>DELIVERY METHOD</h6>
+                <ul class="row">
+                  <li class="col-md-12">
+                    <label> BILLING ADDRESS
+                      <select class="selectpicker" required aria-required="true" id="SelectKurir" name="SelectKurir" onchange="changeKurir()">
+                        <option value="0">Pilih Kurir</option>
+                        <option value="jne">JNE</option>
+                        <option value="tiki">TIKI</option>
+                      </select>
+                    </label>
+                  </li>
+                  <li class="col-md-12">
+                    <label> PAKET
+                      <select class="selectpicker" required aria-required="true" id="SelectPacket" name="SelectPacket" onchange="changePaket()">
+                        <option value="0">Pilih Jenis Pengiriman</option>
+                      </select>
+                    </label>
+                  </li>
+                </ul>
 
-                                                <div class="onepage-payment">
-
-
-                                                    <div class="card-paynemt-box payment-method">
-
-
-                                                        <label class="radio-inline" for="CashOnDelivery"
-                                                               data-toggle="collapse"
-                                                               data-target="#CashOnDeliveryCollapse"
-                                                               aria-expanded="false"
-                                                               aria-controls="CashOnDeliveryCollapse">
-                                                            <input name="radios" id="CashOnDelivery" value="4"
-                                                                   type="radio">
-                                                            Pembayaran dilakukan ke rekening <strong>BCA</strong> : no. rek : 2820105586
-                                                            an. <strong>CV Nusantara Artifisial</strong>  </label>
-
-                                                        <div class="collapse" id="CashOnDeliveryCollapse">
-
-                                                            <p>Transaksi dan barang akan dikirim setelah Penjual melakukan konfirmasi pembayaran anda</p>
-
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <form action="{{URL::to('/checkout/doCheckoutFinal')}}" method="post">
-                                                        <?php $totalPrice = 0;
-                                                        $totalDiscount = 0;
-                                                        $finalPrice = 0; ?>
-                                                        @if (is_array($cart_data) || is_object($cart_data))
-                                                        @foreach($cart_data as $product_in_cart)
-                                                        <?php
-                                                        $totalPrice = $totalPrice + $product_in_cart->price * $cart[$product_in_cart->id];
-                                                        if ($product_in_cart->discount_date_start >= date("Y-m-d") && $product_in_cart->discount_date_end <= date("Y-m-d") && $product_in_cart->discount > 0) {
-
-                                                            $totalDiscount = $totalDiscount + ($product_in_cart->discount / 100) * $product_in_cart->price * $cart[$product_in_cart->id];
-                                                            $priceNow = (100 - $product_in_cart->discount) * $product_in_cart->price / 100;
-                                                        } else {
-                                                            $priceNow = $product_in_cart->price;
-                                                        }
-                                                        $finalPrice = $finalPrice + $priceNow * $cart[$product_in_cart->id];
-                                                        ?>
-                                                        @endforeach
-                                                        @endif
-                                                        <div class="form-group clearfix">
-                                                            <br>
-                                                            <label class="checkbox-inline" for="checkboxes-1">
-                                                                <input name="checkboxes" id="checkboxes-1" value="1" required
-                                                                       type="checkbox">
-                                                                I have read and agree to the <a
-                                                                    href="help">Terms & Conditions</a>
-                                                            </label>
-                                                        </div>
-                                                        <input name="transaction_total" value = "{{$finalPrice}}" type="hidden">
-                                                        <input name="address" id="address" value="0" type="hidden">
-                                                        <input name ="info_kurir" id = "info_kurir" value="" type="hidden">
-                                                        <input name="info_paket" id="info_paket" value="" type="hidden">
-                                                        <input name="shipping_price" id="shipping_price" value="0" type="hidden">
-                                                        <input name="cart_data" id="cart_data" value='{{$cart_data}}' type="hidden">
-                                                        <div class="pull-left"><input name="submit" class="btn  btn-lg btn-primary" type="submit" value="Order"> </div>
-                                                    </form>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <!--onepage-checkout-->
-
-
-                        </div>
-                        <!--/row end-->
-
+                <hr>
+                <h6>PAYMENT METHOD</h6>
+                <ul class="row">
+                  <li class="col-md-12">
+                    <div class="checkbox">
+                      <input id="CashOnDelivery" value="4" class="styled" type="checkbox">
+                      <label for="CashOnDelivery"
+                        data-toggle="collapse"
+                        data-target="#CashOnDeliveryCollapse"
+                        aria-expanded="false"
+                        aria-controls="CashOnDeliveryCollapse">
+                        Pembayaran dilakukan ke rekening <strong>BCA</strong> : no. rek : 2820105586
+                        an. <strong>CV Nusantara Artifisial</strong>  
+                      </label>
                     </div>
-
-
-                </div>
-            </div>
-            <!--/row end-->
-
-        </div>
-
-        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
-            <div class="contentBox">
-                <div class="w100 costDetails">
-
-                    <div class="w100 cartMiniTable">
-                        <table id="cart-summary" class="std table">
-                            <tbody>
-                                <tr>
-                                    <td>Total products</td>
-                                    <td class="price">
-                                        @if(Session::has('cartQty'))
-                                        {{Session::get('cartQty')}}       
-                                        @else
-                                        0
-                                        @endif</td>
-                                </tr>
-                                <tr style="">
-                                    <td>Shipping</td>
-                                    <td class="price"><span class="success" id="textKurir">Kurir</span></td>
-                                </tr>
-                                <tr class="cart-total-price ">
-                                    <td>Harga sebelum diskon</td>
-                                    <td class="price">{{{$totalPrice,0}}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Total Diskon</td>
-                                    <td class="price" id="total-tax">{{{$totalDiscount,0}}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Kupon</td>
-                                    <td class="coupon" id="info-kupon">tidak ada kupon</td>
-                                </tr>
-                                <tr>
-                                    <td>Potongan Kupon</td>
-                                    <td class="coupon-tax" id="total-kupon">0</td>
-                                </tr>
-                                <tr>
-                                    <td> Total</td>
-                                    <td class=" site-color" id="total-price">{{{$finalPrice,0}}}</td>
-                                </tr>
-
-                            </tbody>
-                            <tbody>
-                            </tbody>
-                        </table>
+                  </li>
+                  <li class="collapse" id="CashOnDeliveryCollapse">
+                    <p>Transaksi dan barang akan dikirim setelah Penjual melakukan konfirmasi pembayaran anda</p>
+                  </li>
+                  <li class="col-md-12">
+                    <div class="checkbox">
+                      <input name="checkboxes" id="checkboxes-1" value="1" required type="checkbox">
+                      <label for="checkboxes-1">I have read and agree to the <a href="help">Terms & Conditions</a></label>
                     </div>
+                  </li>
+                </ul>
+
+                <form action="{{URL::to('/checkout/doCheckoutFinal')}}" method="post">
+                  <?php $totalPrice = 0;
+                  $totalDiscount = 0;
+                  $finalPrice = 0; ?>
+                  @if (is_array($cart_data) || is_object($cart_data))
+                  @foreach($cart_data as $product_in_cart)
+                  <?php
+                  $totalPrice = $totalPrice + $product_in_cart->price * $cart[$product_in_cart->id];
+                  if ($product_in_cart->discount_date_start >= date("Y-m-d") && $product_in_cart->discount_date_end <= date("Y-m-d") && $product_in_cart->discount > 0) {
+
+                      $totalDiscount = $totalDiscount + ($product_in_cart->discount / 100) * $product_in_cart->price * $cart[$product_in_cart->id];
+                      $priceNow = (100 - $product_in_cart->discount) * $product_in_cart->price / 100;
+                  } else {
+                      $priceNow = $product_in_cart->price;
+                  }
+                  $finalPrice = $finalPrice + $priceNow * $cart[$product_in_cart->id];
+                  ?>
+                  @endforeach
+                  @endif
+                  <input name="transaction_total" value = "{{$finalPrice}}" type="hidden">
+                  <input name="address" id="address" value="0" type="hidden">
+                  <input name ="info_kurir" id = "info_kurir" value="" type="hidden">
+                  <input name="info_paket" id="info_paket" value="" type="hidden">
+                  <input name="shipping_price" id="shipping_price" value="0" type="hidden">
+                  <input name="cart_data" id="cart_data" value='{{$cart_data}}' type="hidden">
+                  <button name="submit" class="btn  btn-lg btn-dark" type="submit" value="Order">ORDER</button>
+                </form>
+              </div>
+
+              <!-- SUB TOTAL -->
+              <div class="col-sm-5">
+                <div class="order-place">
+                  <h5>YOUR ORDER</h5>
+                  <div class="order-detail">
+                    <p>TOTAL PRODUCTS 
+                      <span> 
+                        @if(Session::has('cartQty'))
+                        {{Session::get('cartQty')}}       
+                        @else
+                        0
+                        @endif
+                      </span>
+                    </p>
+                    <p>SHIPPING <span id="textKurir">Kurir</span></p>
+                    <p>HARGA SBLM. DISKON <span>{{{$totalPrice,0}}}</span></p>
+                    <p>TOTAL DISKON <span id="total-tax">{{{$totalDiscount,0}}}</span></p>
+                    <p>KUPON <span id="info-kupon">Tidak Ada</span></p>
+                    <p>POTONGAN KUPON <span id="total-kupon">0</span></p>
+                    <p>TOTAL <span id="total-price">{{{$finalPrice,0}}}</span></p>
+                  </div>
                 </div>
+              </div>
+
             </div>
+          </div>
         </div>
-        <!-- End popular -->
-
-    </div>
-    <!--/rightSidebar-->
-
-</div>
-<!--/row-->
-
-<div style="clear:both"></div>
-</div>
-<!-- /.main-container-->
-<div class="gap"></div>
+      </div>
+    </section>
+  </div>
 @endsection
 
 @section ('javascript')
