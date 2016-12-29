@@ -75,7 +75,7 @@
           </li>
           
           <!--======= Shopping Cart =========-->
-          <li class="shop-cart"><a href="#."><i class="fa fa-shopping-cart"></i></a> 
+          <li class="shop-cart"><a href="{{ URL::to('cart') }}"><i class="fa fa-shopping-cart"></i></a> 
             <span class="numb">
               @if(Session::has('cartQty'))
                 {{Session::get('cartQty')}}

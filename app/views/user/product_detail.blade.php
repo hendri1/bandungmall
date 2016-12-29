@@ -62,6 +62,7 @@
               </div>  
             </div>
             <form action="{{ URL::to('cart/add') }}" method="POST">
+              <input type="hidden" name="product_id" value="{{$product->id}}">
               <div class="row">
                 <div class="col-sm-12">
                   <div class="item-select"> 
@@ -121,7 +122,7 @@
                   <table class="table">
                     <tbody>
                       <tr>
-                        <td style='margin-righ:5px;'><strong>Brand</strong></td>
+                        <td style='margin-right:5px;'><strong>Brand</strong></td>
                         <td>{{$product->brand}}</td>
                       </tr>
                       <tr>
