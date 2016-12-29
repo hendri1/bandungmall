@@ -117,9 +117,36 @@ $(".fur-slide").owlCarousel({
         }}
 });
 /*-----------------------------------------------------------------------------------*/
-/* 		CLIENTS LOGO SLIDE
+/*    CLIENTS LOGO SLIDE
 /*-----------------------------------------------------------------------------------*/
 $(".client-slide").owlCarousel({ 
+  autoplay:true,
+  autoplayHoverPause:true,
+  singleItem  : true,
+  navText: ["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+  lazyLoad:true,
+  nav: false,
+  loop:true,
+  margin:30,
+  animateOut: 'fadeOut',  
+  responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        800:{
+            items:6
+        },
+        1200:{
+            items:10
+        }}  
+});
+/*-----------------------------------------------------------------------------------*/
+/* 		CLIENTS LOGO SLIDE VARIANT
+/*-----------------------------------------------------------------------------------*/
+$(".client-slide-4").owlCarousel({ 
 	autoplay:true,
 	autoplayHoverPause:true,
 	singleItem	: true,
@@ -134,13 +161,13 @@ $(".client-slide").owlCarousel({
             items:1
         },
         600:{
-            items:3
+            items:2
         },
         800:{
-            items:6
+            items:3
         },
         1200:{
-            items:10
+            items:4
         }}	
 });
 /*-----------------------------------------------------------------------------------*/
