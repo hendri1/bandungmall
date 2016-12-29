@@ -2,8 +2,8 @@
 * category
 * product detail
 * cart
-checkout
+* checkout
 profile
 final order
 history order
-help
+* help
