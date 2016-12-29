@@ -1,5 +1,5 @@
-home
-category
+* home
+* category
 product detail
 cart
 checkout

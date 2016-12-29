@@ -1,12 +1,6 @@
 @extends('user.templates.layout')
 
 @section('content')
-<!-- /.Fixed navbar  -->
-<style>
-	.headerOffset {
-		padding-top: 100px;
-	}
-</style>
 
   <!-- CONTENT START -->
   <div class="content"> 
@@ -79,6 +73,7 @@
                     <!-- Item Name -->
                     <div class="details-sec"> 
                       <a href="productDetail?product_id={{$product->id}}">{{$product->name}}</a> 
+                      <div>{{ $product->brand }}</div>
                       @if($product->discount > 0 && strtotime(date('Y-m-d')) >= strtotime($product->discount_date_start)  && strtotime(date('Y-m-d')) <= strtotime($product->discount_date_end))
                       <?php $priceNow = (100 - $product->discount) * $product->price / 100; ?>
                       <span class="text-line">Rp. {{number_format($product->price,2,',','.')}}</span>
