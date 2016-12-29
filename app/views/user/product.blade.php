@@ -8,7 +8,11 @@
     <!--======= SUB BANNER =========-->
     <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
       <div class="container">
+        @if(isset($category_parent))
         <h4>KOLEKSI {{ strtoupper($category_parent->name) }}</h4>
+        @else
+        <h4>HASIL PENCARIAN</h4>
+        @endif
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
           <li><a href="#">Home</a></li>
