@@ -1,55 +1,49 @@
 @extends('user.templates.layout')
 
 @section('content')
-<div class="container main-container headerOffset">
-    <div class="row">
-        <div class="breadcrumbDiv col-lg-12">
-            <ul class="breadcrumb">
-                <li><a href="{{URL::to('home')}}">Home</a></li>
-                <li class="active"> My account</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-9 col-md-9 col-sm-7">
-            <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i> My account </span></h1>
+  
+  <!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= SUB BANNER =========-->
+    <section class="sub-banner">
+      <div class="container">
+        <h4>MY ACCOUNT</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="{{ URL::to('/') }}">Home</a></li>
+          <li class="active">MY ACCOUNT</li>
+        </ol>
+      </div>
+    </section>
 
-            <div class="row userInfo">
-                <div class="col-xs-12 col-sm-12">
+    <!--======= PAGES INNER =========-->
+    <section class="section-p-30px pages-in chart-page">
+      <div class="container"> 
+        <p class="text-center lead">Welcome to your account. Here you can manage all of your personal information and orders.</p>
+      
 
-                    <h2 class="block-title-2"><span>Welcome to your account. Here you can manage all of your personal information and orders.</span>
-                    </h2>
-                    <ul class="myAccountList row">
-                        <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail equalheight"><a title="Orders" href="{{ URL::to('user/transactionHistory')}}"><i
-                                    class="fa fa-calendar"></i> Order history </a></div>
-                        </li>
-                        <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail equalheight"><a title="My addresses" href="{{ URL::to('user/address')}}"><i
-                                    class="fa fa-map-marker"></i> My addresses</a></div>
-                        </li>
-                        <!-- <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail equalheight"><a title="My addresses" href="{{ URL::to('user/bank')}}"><i
-                                    class="fa fa-university"></i> My account bank</a></div>
-                        </li> -->
-                        <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail equalheight"><a title="Personal information"
-                                                                  href="{{ URL::to('user/info')}}"><i class="fa fa-cog"></i>
-                                Personal information</a></div>
-                        </li>
-                    </ul>
-                    <div class="clear clearfix"></div>
-                </div>
-            </div>
-            <!--/row end-->
+        <ul class="myAccountList row">
+          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+            <div class="thumbnail equalheight"><a title="Orders" href="{{ URL::to('user/transactionHistory')}}"><i style="display:block;text-align:center;padding:40px"
+                      class="fa fa-calendar fa-4x"></i> Order history </a></div>
+          </li>
+          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+            <div class="thumbnail equalheight"><a title="My addresses" href="{{ URL::to('user/address')}}"><i style="display:block;text-align:center;padding:40px"
+                      class="fa fa-map-marker fa-4x"></i> My addresses</a></div>
+          </li>
+          <!-- <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+              <div class="thumbnail equalheight"><a title="My addresses" href="{{ URL::to('user/bank')}}"><i
+                      class="fa fa-university"></i> My account bank</a></div>
+          </li> -->
+          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+            <div class="thumbnail equalheight"><a title="Personal information"
+                                                    href="{{ URL::to('user/info')}}"><i style="display:block;text-align:center;padding:40px" class="fa fa-cog fa-4x"></i>
+                  Personal info</a></div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-5"></div>
-    </div>
-    <!--/row-->
-
-    <div style="clear:both"></div>
-</div>
-<!-- /wrapper -->
-<div class="gap"></div>
+  </div>
 @endsection

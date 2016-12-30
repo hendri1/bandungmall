@@ -3,7 +3,7 @@
 * product detail
 * cart
 * checkout
-profile
+* profile
 * final order
 * history order
 * help
