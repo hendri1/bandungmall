@@ -103,17 +103,17 @@
                   <form class="form-inline" action="page" method="post">
                     <li>
                       <div class="checkbox" style="padding-left:10px">
-                        <input id="checkbox3-1" class="styled" type="radio" value="option-b1" name="add" checked>
-                        <label for="checkbox3-1" style="padding-left:30px"> SAME AS BILLING ADDRESS </label>
+                        <input id="same_as_billing" class="styled" type="radio" value="option-b1" name="add" checked>
+                        <label for="same_as_billing" style="padding-left:30px"> SAME AS BILLING ADDRESS </label>
                       </div>
                     </li>
                     <li>
                       <div class="checkbox" style="padding-left:10px">
-                        <input id="checkbox3-2" class="styled" type="radio" value="option-b2" name="add" data-toggle="collapse" data-target="newShippingAddressBox">
-                        <label for="checkbox3-2" style="padding-left:30px"> NEW SHIPPING ADDRESS </label>
+                        <input id="new_shipping" class="styled" type="radio" value="option-b2" name="add">
+                        <label for="new_shipping" style="padding-left:30px"> NEW SHIPPING ADDRESS </label>
                       </div>
                     </li>
-                    <li class="expandBox collapse" id="newShippingAddressBox">
+                    <li id="newShippingAddressBox">
                       <div class="form-group uppercase">
                         <a class="btn btn-dark" href="{{URL::to('user/address')}}">New shipping address</a>
                       </div>
@@ -126,7 +126,7 @@
                 <ul class="row">
                   <li class="col-md-12">
                     <label> BILLING ADDRESS
-                      <select class="selectpicker" required aria-required="true" id="SelectKurir" name="SelectKurir" onchange="changeKurir()">
+                      <select class="form-control" required aria-required="true" id="SelectKurir" name="SelectKurir" onchange="changeKurir()">
                         <option value="0">Pilih Kurir</option>
                         <option value="jne">JNE</option>
                         <option value="tiki">TIKI</option>
@@ -135,7 +135,7 @@
                   </li>
                   <li class="col-md-12">
                     <label> PAKET
-                      <select class="selectpicker" required aria-required="true" id="SelectPacket" name="SelectPacket" onchange="changePaket()">
+                      <select class="form-control" required aria-required="true" id="SelectPacket" name="SelectPacket" onchange="changePaket()">
                         <option value="0">Pilih Jenis Pengiriman</option>
                       </select>
                     </label>
@@ -190,7 +190,7 @@
                   @endif
                   <input name="transaction_total" value = "{{$finalPrice}}" type="hidden">
                   <input name="address" id="address" value="0" type="hidden">
-                  <input name ="info_kurir" id = "info_kurir" value="" type="hidden">
+                  <input name ="info_kurir" id="info_kurir" value="" type="hidden">
                   <input name="info_paket" id="info_paket" value="" type="hidden">
                   <input name="shipping_price" id="shipping_price" value="0" type="hidden">
                   <input name="cart_data" id="cart_data" value='{{$cart_data}}' type="hidden">
@@ -272,6 +272,15 @@
             });
         });
 
+        $('#newShippingAddressBox').hide();
+        $('input[name="add"]').on('change', function() {
+          if ($('#new_shipping').is(':checked')) {
+            $('#newShippingAddressBox').slideDown();
+          } else {
+            $('#newShippingAddressBox').slideUp();
+          }
+        });
+
         $('input#newAddress').on('ifChanged', function (event) {
             //alert(event.type + ' callback');
             $('#newBillingAddressBox').collapse("show");
@@ -337,18 +346,18 @@
     }
 
     function changeKurir() {
-        document.getElementById("info_kurir").value = document.getElementById("SelectKurir").value;
+        var kurir = $('#SelectKurir').val();
+        $('#info_kurir').val(kurir);
 
         $.ajax({
             url: 'checkout/getCost',
-            data: 'address_id='+document.getElementById("SelectAddress").value+"&info_kurir="+document.getElementById("SelectKurir").value+"&cart_data="+$("#cart_data").val(),
+            data: 'address_id='+document.getElementById("SelectAddress").value+"&info_kurir="+kurir+"&cart_data="+$("#cart_data").val(),
             success: function(r){
-                var x;
                 var res = "<option value='0'>Pilih Jenis Pengiriman</option>";
 
                 for (var i = r['content'].length - 1; i >= 0; i--) {
                     if(r['content'][i]['etd'] !== ''){
-                        res += "<option value='"+r['content'][i]['cost']+"'>"+r['content'][i]['service']+"";
+                        res += "<option value='"+r['content'][i]['cost']+"'>"+r['content'][i]['service']+"</option>";
                     }
                 }
                 $("#SelectPacket").html(res);

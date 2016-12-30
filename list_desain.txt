@@ -4,6 +4,6 @@
 * cart
 * checkout
 profile
-final order
-history order
+* final order
+* history order
 * help

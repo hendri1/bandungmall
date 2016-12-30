@@ -75,6 +75,8 @@
 <script type="text/javascript" src="{{ asset('public/assets/user/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script> 
 <script src="{{ asset('public/assets/user/js/main.js') }}"></script>
 
+@yield('javascript')
+
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
   var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

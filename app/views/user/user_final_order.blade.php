@@ -1,176 +1,148 @@
 @extends('user.templates.layout')
 
 @section('content')
-<div class="container main-container headerOffset">
-    <div class="row">
-        <div class="breadcrumbDiv col-lg-12">
-            <ul class="breadcrumb">
-                <li><a href="{{URL::to('/')}}">Home</a></li>
-                <li><a href="{{URL::to('/cart')}}">Cart</a></li>
-                <li class="active">Final Order</li>
+<!-- CONTENT START -->
+  <div class="content"> 
+    
+    <!--======= SUB BANNER =========-->
+    <section class="sub-banner">
+      <div class="container">
+        <h4>TERIMA KASIH ATAS PEMESANAN ORDER <a href="{{URL::to('/user/transactionHistory')}}">#{{$transaction->id}}</a></h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="{{ URL::to('home')}}">Home</a></li>
+          <li class="active">ORDER COMPLETE</li>
+        </ol>
+      </div>
+    </section>
+
+    <!--======= PAGES INNER =========-->
+    <section class="section-p-30px pages-in chart-page">
+      <div class="container"> 
+        
+        <!-- Payments Steps -->
+        <div class="payment_steps">
+          <ul class="row">
+            <!-- SHOPPING CART -->
+            <li class="col-sm-4"> <i class="fa fa-shopping-cart"></i>
+              <h6>SHOPPING CART</h6>
+            </li>
+            
+            <!-- CHECK OUT DETAIL -->
+            <li class="col-sm-4"> <i class="fa fa-align-left"></i>
+              <h6>CHECK OUT DETAIL</h6>
+            </li>
+            
+            <!-- ORDER COMPLETE -->
+            <li class="col-sm-4 current"> <i class="fa fa-check"></i>
+              <h6>ORDER COMPLETE</h6>
+            </li>
+          </ul>
+        </div>
+
+        <p class="lead text-center">Barang yang dipesan akan sesegera mungkin dikonfirmasi dan dikirim kepada anda</p>
+
+        <!-- Payments Steps -->
+        <div class="shopping-cart text-center">
+          <div class="cart-head">
+            <ul class="row">
+              <!-- PRODUCTS -->
+              <li class="col-sm-6">
+                <h6>PRODUCTS</h6>
+              </li>
+              <!-- DETAILS -->
+              <li class="col-sm-6">
+                <h6>DETAILS</h6>
+              </li>
             </ul>
-        </div>
-    </div>
-    <!--/.row-->
+          </div>
 
-
-    <div class="row">
-        <div class="col-lg-12 ">
-            <div class="row userInfo">
-
-                <div class="thanxContent text-center">
-
-                    <h1> Terima kasih atas pemesanan order <a href="{{URL::to('/user/transactionHistory')}}">#{{$transaction->id}}</a></h1>
-                    <h4> Barang yang dipesan akan sesegera mungkin dikonfirmasi dan dikirim kepada anda</h4>
-
-                </div>
-
-                <div class="col-lg-7 col-center">
-                    <h4></h4>
-
-                    <div class="cartContent table-responsive  w100">
-                        <table style="width:100%" class="cartTable cartTableBorder">
-                            <tbody>
-
-                            <tr class="CartProduct  cartTableHeader">
-                                <td colspan="2"> Barang yang akan dikirim</td>
-
-
-                                <td style="width:15%"></td>
-                            </tr>
-                            @foreach($final_cart as $product)
-
-                            <tr class="CartProduct">
-                                <td class="CartProductThumb">
-                                    <div><a href="{{URL::to('productDetail?product_id='.$product->id)}}"><img class="img-responsive" src="{{URL::to($product->image_link)}}" alt="img" ></a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="CartDescription">
-                                        <h4><a href="{{URL::to('productDetail?product_id='.$product->id)}}">{{$product->name}} </a></h4>
-                                        <span class="size">Rp. {{$product->price}}</span>
-
-                                        <div class="price"><span>
-                                            @if( $product->discount_date_start >= date("Y-m-d") && $product->discount_date_end <= date("Y-m-d") && $product->discount > 0)
-                                                <div class="product-price"><span class="price-sales"> 
-                                                    <?php $priceNow = (100 - $product->discount) * $product->price / 100; ?>Discount Price : Rp. {{$priceNow}}
-                                                </span> 
-                                            @else
-                                            @endif</span></div>
-                                    </div>
-                                </td>
-
-
-                            </tr>
-
-                            @endforeach
-                            </tbody>
-                        </table>
-                        <div class="cartFooter w100">
-                            <div class="box-footer">
-                                <div class="pull-left"><a href="{{URL::to('/')}}" class="btn btn-default"> <i
-                                        class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a></div>
-                                <div class="pull-right"><a href ="{{URL::to('/user/transactionHistory')}}" class="btn btn-default"> &nbsp;Lihat Pemesanan 
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+          @foreach($final_cart as $product)
+          <!-- Cart Details -->
+          <ul class="row cart-details">
+            <li class="col-sm-6">
+              <div class="media"> 
+                <!-- Media Image -->
+                <div class="media-left media-middle"> <a href="{{URL::to('productDetail?product_id='.$product->id)}}" class="item-img"> <img class="media-object" src="{{URL::to($product->image_link)}}" alt=""> </a> </div>
+                
+                <!-- Item Name -->
+                <div class="media-body">
+                  <div class="position-center-center">
+                    <h6>{{$product->name}}</h6>
+                    <div class="price">
+                      @if( $product->discount_date_start >= date("Y-m-d") && $product->discount_date_end <= date("Y-m-d") && $product->discount > 0)
+                      <span class="price-sales"> 
+                          <?php $priceNow = (100 - $product->discount) * $product->price / 100; ?>Discount Price : Rp. {{$priceNow}}
+                      </span> <br>
+                      @else
+                      @endif
+                      <span>{{$product->price}}</span>
                     </div>
-
+                  </div>
                 </div>
-            </div>
-            <!--/row end-->
+              </div>
+            </li>
+          </ul>
+          @endforeach
 
-        </div>
+          <!-- BTN INFO -->
+          <div class="btn-sec"> 
+            <!-- UPDATE SHOPPING CART --> 
+            <a href="{{URL::to('/user/transactionHistory')}}" class="btn btn-dark"> <i class="fa fa-arrow-circle-o-up"></i> LIHAT PEMESANAN </a> 
+            <!-- CONTINUE SHOPPING --> 
+            <a href="{{URL::to('/')}}" class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i> CONTINUE SHOPPING </a>
+          </div>
 
-        <!--/rightSidebar-->
 
-    </div>
-    <!--/row-->
-    <div class="gap"></div>
 
-    <div class="row">
-            <div class="col-sm-6">
-                <div id="bordered">
-                    <p>Total pembelian anda sebesar <strong class="text-info">Rp. {{number_format($transaction->total, 0, '', '.');}},- </strong>(belum termasuk ongkos kirim)</p>
+          <!-- SHOPPING INFORMATION -->
+          <div class="cart-ship-info">
+            <div class="row"> 
+              
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-8">
+                <p>Total pembelian anda sebesar <strong class="text-info">Rp. {{number_format($transaction->total, 0, '', '.');}},- </strong>(belum termasuk ongkos kirim)</p>
                     <ul class="padbottom">
                     <li>Silahkan di transfer ke salah satu nomor rekening yang tertera dibawah ini.<strong>(BCA)</strong></li>
                     <li>Setelah itu masukkan nomor rekening yang anda gunakan dan nominal yang di transfer pada kotak <strong>Konfirmasi Pembayaran</strong> untuk melanjutkan transaksi.</li>
-                    
-                    </ul>
-                    <h3>Nomor rekening bandungmall.com</h3>
-                    <div class="table-responsive">
-                        <table class="table">
-                          <tr>
-                            <th scope="row">BCA</th>
-                            <td>2820105586</td>
-                            <td>an. cv nusantara artifisial</td>
-                          </tr>
-                          <!--
-                          <tr>
-                            <th scope="row">Mandiri</th>
-                            <td>XXXX-XXXX-XXXX</td>
-                            <td>an. PT. goget.com</td>
-                          </tr>
-                          -->
-                        </table>
+                <div>
+                <h6 style="margin-top:25px">NO. REKENING BANDUNGMALL.COM</h6>
+                  <table class="table">
+                    <tr>
+                      <th scope="row">BCA</th>
+                      <td>2820105586</td>
+                      <td>an. cv nusantara artifisial</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              
+              <!-- SUB TOTAL -->
+              <div class="col-sm-4">
+                <div class="grand-total"> 
+                  <h4>KONFIRMASI PEMBAYARAN </span></h4>
+                  <form action="{{ URL::to('user/doInsertPaymentConfirmation') }}" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <p class="text-left">Upload Bukti:</p>
+                      <input type="file" name="images[]" id="images" class="form-control" required/>
                     </div>
+                    <div class="form-group">
+                      <input type="hidden" name="transaction_id" value="{{$transaction->id}}" />
+                      <button style="margin-top:20px;" class="btn" type="submit" title="checkout" href="{{URL::to('/checkout')}}">UPLOAD</button> 
+                    </div>
+                  </form>
                 </div>
-            </div>
-            
-            <div class="col-sm-6">
-                <div id="bordered">
-                    <h3>Konfirmasi Pembayaran</h3>
-                    <hr />
-                        <form action="{{ URL::to('user/doInsertPaymentConfirmation') }}" method="POST" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="norek">Upload Bukti:</label>
-                                <input type="file" name="images[]" id="images" class="form-control" required/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" name="transaction_id" value="{{$transaction->id}}" />
-                                <input type="submit" class="btn btn-primary" value="UPLOAD"/>
-                            </div>
-                        </form>
-                        <!-- <form action="{{URL::to('user/doInsertPaymentConfirmation')}}" method="post" role="form">
-                        <div class="form-group">
-                            <select class="form-control" name="account_bank" id="bankSelector" onchange="run()">
-                                <option value="0" selected>Pilih Bank</option>
-                                @foreach($banks as $bank)
-                                    <option value="{{$bank->id_user_bank}}">{{$bank->bank_account}} ({{$bank->nama_bank}})</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="norek">Nama Rekening:</label>
-                            <input type="text" name="account_name" id="account_name" class="form-control" id="nama-rek" placeholder="Nama rekening anda" required readonly/>
-                        </div>
-                        <div class="form-group">
-                            <label for="norek">Nomor Rekening:</label>
-                            <input type="text" name="account_number" id="account_number" class="form-control" id="no-rek" placeholder="Nomor rekening anda" required readonly/>
-                        </div>
-                        <div class="form-group">
-                            <label for="nominal">Nominal:</label>
-                            <input type="text" name="amount" class="form-control" id="nominal" placeholder="Nominal yang anda transfer" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="tiperek">Tujuan Transfer:</label>
-                            <select name="account_destination" class="form-control" id="tiperek" required>
-                                <option value="bca">BCA cv nusantara artifisial</option>
-                                <option value="mandiri">Mandiri PT. goget</option>
-                            </select>
-                        </div>
-                        <input type="hidden" name="transaction_id" value="{{$transaction->id}}" />
-                        <button class="btn btn-primary" type="submit">Konfirmasi</button>
-                    </form> -->
-                </div>
-            </div>
-        
-        </div>
-</div>
-<!-- /.main-container -->
+              </div>
 
-<div class="gap"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+  
 @endsection
 <script type="text/javascript">
 function run(){
