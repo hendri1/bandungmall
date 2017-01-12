@@ -131,13 +131,13 @@ $(".client-slide").owlCarousel({
   animateOut: 'fadeOut',  
   responsive:{
         0:{
-            items:1
+            items:5
         },
         600:{
-            items:3
+            items:10
         },
         800:{
-            items:6
+            items:10
         },
         1200:{
             items:10
@@ -261,7 +261,7 @@ jQuery('.tp-banner-fix').show().revolution({
 	dottedOverlay:"none",
 	delay:10000,
 	startwidth:1170,
-	startheight:700,
+	startheight:595,
 	navigationType:"bullet",
 	navigationArrows:"solo",
 	navigationStyle:"preview4",
@@ -270,7 +270,8 @@ jQuery('.tp-banner-fix').show().revolution({
 	parallaxLevels:[7,4,3,2,5,4,3,2,1,0],												
 	keyboardNavigation:"on",						
 	fullWidth:"off",
-	fullScreen:"off"
+	fullScreen:"off",
+  autoHeight:"on",
 });
 /*-----------------------------------------------------------------------------------*/
 /* 	SLIDER REVOLUTION

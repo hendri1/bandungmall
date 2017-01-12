@@ -3,14 +3,14 @@
 @section('content')
 
   <!--======= HOME MAIN SLIDER =========-->
-  <section class="home-slider" style="height: 595.8px">
+  <section class="home-slider">
     <div class="tp-banner-container">
       <div class="tp-banner-fix" >
         <ul>
           @foreach ($banners as $banner)
           <li data-transition="random" data-slotamount="7"> 
             <a href="{{ URL::to($banner->target_url) }}">
-              <img style="height:595.8px" src="{{ asset($banner->image_url) }}" class="rev-slidebg" data-bgposition="center center" data-bgfit="contain" data-bgrepeat="no-repeat" alt="" />
+              <img style="width:100%" src="{{ asset($banner->image_url) }}" class="rev-slidebg" data-bgposition="center center" data-bgfit="contain" data-bgrepeat="no-repeat" alt="" />
             </a>
           </li>
           @endforeach

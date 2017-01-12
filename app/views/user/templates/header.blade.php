@@ -8,8 +8,8 @@
         <div class="top-links">
           <ul>            
             @if (!Auth::check())
-            <li><a href="#" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">Login</span><i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a></li>
-            <li class="hidden-xs"><a href="#" data-toggle="modal" data-target="#ModalSignup"> Register </a></li>
+            <li><a href="#" data-toggle="modal" data-target="#ModalLogin">Login</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#ModalSignup"> Register </a></li>
             @else
             <li><a href="{{ URL::to('user/myAccount') }}">{{ Auth::user()->first_name. ' ' . Auth::user()->last_name }}</a></li>
             <li><a href="{{ URL::to('user/doLogout') }}">Logout <i class="fa fa-sign-out"></i></a></li>
@@ -21,8 +21,11 @@
     
     <!-- Logo -->
     <div class="container">
-      <div class="logo"> <a href="{{ URL::to('/') }}"> <img src="{{ asset('public/assets/common/images/logo-large.png') }}" alt="Bandungmall.co.id"> </a> </div>
-      </div>
+      <div class="logo"> <a href="{{ URL::to('/') }}"> 
+        <img src="{{ asset('public/assets/common/images/logo-large.png') }}" alt="Bandungmall.co.id" class="hidden-xs" style="max-width:669px">
+        <img src="{{ asset('public/assets/common/images/logo-large.png') }}" alt="Bandungmall.co.id" class="visible-xs-block" style="width: 100%;">         
+      </a></div>
+    </div>
       
          <div class="sticky">
       <div class="container">
